@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Acesso ao sistema OrbitGuard - plataforma de monitoramento ambiental por satélite.">
+  <meta name="author" content="Equipe OrbitGuard - FIAP">
+  <meta name="theme-color" content="#0a0e1a">
+  <title>Acesso ao Sistema | OrbitGuard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="starfield"></div>
+  <div class="grid-overlay"></div>
+
+  <nav class="landing-nav">
+    <a href="index.html" class="brand">
+      <span class="brand-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 7 9 3 5 7l4 4"/><path d="m17 11 4 4-4 4-4-4"/><path d="m8 12 4 4"/><path d="m16 8 3-3"/><path d="M9 21a6 6 0 0 0-6-6"/></svg></span>
+      <span class="brand-text">Orbit<span class="brand-accent">Guard</span></span>
+    </a>
+    <a href="index.html" class="btn btn-ghost btn-sm icon-text">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Início
+    </a>
+  </nav>
+
+  <main class="login-wrap">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="ico"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 7 9 3 5 7l4 4"/><path d="m17 11 4 4-4 4-4-4"/><path d="m8 12 4 4"/><path d="m16 8 3-3"/><path d="M9 21a6 6 0 0 0-6-6"/></svg></div>
+        <h1>Acesso ao Sistema</h1>
+        <p>Autentique-se para acessar o OrbitGuard</p>
+      </div>
+
+      <div class="login-error" id="loginError">Credenciais inválidas. Verifique os dados e tente novamente.</div>
+
+      <form class="login-form" id="loginForm" autocomplete="off">
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seu@email.com" required>
+        </div>
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" placeholder="Digite sua senha" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-top:0.3rem;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Entrar
+        </button>
+      </form>
+
+      <div class="login-hint">
+        <strong style="color:var(--text-dim);">Credenciais de demonstração</strong>
+        <div class="cred-row">
+          <span class="cred-perfil">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Administrador
+          </span>
+          <code>admin@orbitguard.com / admin123</code>
+        </div>
+        <div class="cred-row">
+          <span class="cred-perfil">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Usuário
+          </span>
+          <code>user@orbitguard.com / user123</code>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Redireciona ao painel caso o usuário já esteja autenticado
+    if (Auth.isLogado()) window.location.href = 'dashboard.html';
+
+    const form = document.getElementById('loginForm');
+    const errBox = document.getElementById('loginError');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+      const sessao = Auth.login(email, senha);
+      if (sessao) {
+        errBox.classList.remove('show');
+        window.location.href = 'dashboard.html';
+      } else {
+        errBox.classList.add('show');
+        document.getElementById('senha').value = '';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dados de monitoramento do OrbitGuard: leituras de temperatura, umidade e precipitação coletadas por satélite, com classificação automática de risco.">
+  <meta name="author" content="Equipe OrbitGuard - FIAP">
+  <meta name="theme-color" content="#0a0e1a">
+  <title>Monitoramento Ambiental | OrbitGuard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="starfield"></div>
+  <div class="grid-overlay"></div>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="page-head">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow">Sensoriamento Remoto</p>
+            <h1>Dados de Monitoramento</h1>
+            <p>Leituras de temperatura, umidade e precipitação coletadas por satélite.</p>
+          </div>
+          <button class="btn btn-success admin-only" id="btnNova">
+            <span class="icon-text">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Nova Leitura
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="filter-group" style="min-width:220px;">
+          <label>Filtrar por região</label>
+          <select id="regiaoFilter"><option value="ALL">Todas as regiões</option></select>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Região</th><th>Temperatura</th><th>Umidade</th>
+                <th>Chuva</th><th>Data</th><th>Risco Calculado</th>
+              </tr>
+            </thead>
+            <tbody id="monBody"></tbody>
+          </table>
+        </div>
+        <p class="text-dim" style="font-size:0.8rem; margin-top:1rem;">
+          <strong>Regra de risco:</strong> temperatura &gt; 35°C ou umidade &lt; 30% → <span style="color:var(--red)">ALTO</span> ·
+          temperatura &gt; 30°C ou umidade &lt; 50% → <span style="color:var(--yellow)">MÉDIO</span> ·
+          caso contrário → <span style="color:var(--green)">BAIXO</span>.
+          Leituras de nível ALTO geram alerta automaticamente.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal nova leitura -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3><span class="icon-text">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49"/><path d="M7.76 16.24a6 6 0 0 1 0-8.49"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+          Nova Leitura de Monitoramento</span></h3>
+        <button class="modal-close" id="modalClose">×</button>
+      </div>
+      <form id="monForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="f_regiao">Região</label>
+            <select id="f_regiao" required></select>
+          </div>
+          <div class="field">
+            <label for="f_temp">Temperatura (°C)</label>
+            <input type="number" id="f_temp" step="0.1" min="-10" max="60" required>
+          </div>
+          <div class="field">
+            <label for="f_umid">Umidade (%)</label>
+            <input type="number" id="f_umid" min="0" max="100" required>
+          </div>
+          <div class="field">
+            <label for="f_chuva">Chuva (mm)</label>
+            <input type="number" id="f_chuva" min="0" step="0.1" required>
+          </div>
+          <div class="field">
+            <label for="f_data">Data</label>
+            <input type="date" id="f_data" required>
+          </div>
+        </div>
+        <p class="hint" id="riskPreview" style="margin-top:1rem;"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="modalCancel">Cancelar</button>
+          <button type="submit" class="btn btn-success">Salvar Leitura</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/monitoramento.js"></script>
+</body>
+</html>

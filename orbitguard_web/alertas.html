@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Central de alertas do OrbitGuard: alertas ambientais gerados automaticamente pelo sistema, com filtros por nível, status e região.">
+  <meta name="author" content="Equipe OrbitGuard - FIAP">
+  <meta name="theme-color" content="#0a0e1a">
+  <title>Central de Alertas | OrbitGuard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="starfield"></div>
+  <div class="grid-overlay"></div>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="page-head">
+        <p class="eyebrow">Gestão de Riscos</p>
+        <h1>Central de Alertas</h1>
+        <p>Alertas ambientais gerados pelo sistema. Administradores podem resolver alertas ativos.</p>
+      </div>
+
+      <!-- Resumo -->
+      <div class="summary-grid" id="alertSummary"></div>
+
+      <!-- Filtros -->
+      <div class="filters">
+        <div class="filter-group">
+          <label>Nível</label>
+          <div class="chips" id="nivelChips">
+            <span class="chip active" data-nivel="ALL">Todos</span>
+            <span class="chip" data-nivel="ALTO">Alto</span>
+            <span class="chip" data-nivel="MEDIO">Médio</span>
+            <span class="chip" data-nivel="BAIXO">Baixo</span>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>Status</label>
+          <div class="chips" id="statusChips">
+            <span class="chip active" data-status="ALL">Todos</span>
+            <span class="chip" data-status="ATIVO">Ativo</span>
+            <span class="chip" data-status="RESOLVIDO">Resolvido</span>
+            <span class="chip" data-status="INATIVO">Inativo</span>
+          </div>
+        </div>
+        <div class="filter-group" style="flex:1; min-width:180px;">
+          <label>Região</label>
+          <select id="regiaoFilter"><option value="ALL">Todas as regiões</option></select>
+        </div>
+      </div>
+
+      <div class="alert-grid" id="alertGrid"></div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/alertas.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Painel de controle do OrbitGuard: visão consolidada do estado ambiental do território, temperaturas por região e distribuição de risco.">
+  <meta name="author" content="Equipe OrbitGuard - FIAP">
+  <meta name="theme-color" content="#0a0e1a">
+  <title>Painel de Controle | OrbitGuard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="starfield"></div>
+  <div class="grid-overlay"></div>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="page-head">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow">Central de Operações</p>
+            <h1 id="welcomeTitle">Painel de Controle</h1>
+            <p id="welcomeSub">Visão consolidada do estado ambiental do território.</p>
+          </div>
+          <a href="alertas.html" class="btn btn-primary">
+            <span class="icon-text">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+              Ver Alertas Ativos
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Cards de resumo -->
+      <div class="summary-grid" id="summaryGrid"></div>
+
+      <div class="grid-2">
+        <!-- Gráfico de temperaturas -->
+        <section class="panel">
+          <h3 class="panel-title"><span class="dot"></span>Temperatura por Região (última leitura)</h3>
+          <div class="bar-chart" id="tempChart"></div>
+          <div class="chart-legend">
+            <span><i style="background:var(--red)"></i> &gt; 35°C crítico</span>
+            <span><i style="background:var(--orange)"></i> 30–35°C elevado</span>
+            <span><i style="background:var(--green)"></i> &lt; 30°C normal</span>
+          </div>
+        </section>
+
+        <!-- Distribuição de risco -->
+        <section class="panel">
+          <h3 class="panel-title"><span class="dot"></span>Distribuição de Risco (alertas ativos)</h3>
+          <div class="risk-summary" id="riskSummary" style="height: 220px;"></div>
+          <p class="text-dim" style="text-align:center; font-size:0.82rem; margin-top:0.8rem;">
+            Classificação automática por nível de severidade
+          </p>
+        </section>
+      </div>
+
+      <!-- Status das regiões -->
+      <section class="panel mt-2">
+        <h3 class="panel-title"><span class="dot"></span>Status das Regiões Monitoradas</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Região</th><th>UF</th><th>Última Temp.</th><th>Umidade</th>
+                <th>Chuva</th><th>Risco</th><th>Alertas Ativos</th>
+              </tr>
+            </thead>
+            <tbody id="regionStatusBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Regiões monitoradas pelo OrbitGuard: biomas brasileiros sob vigilância orbital, com leituras, alertas e eventos consolidados por região.">
+  <meta name="author" content="Equipe OrbitGuard - FIAP">
+  <meta name="theme-color" content="#0a0e1a">
+  <title>Regiões Monitoradas | OrbitGuard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="starfield"></div>
+  <div class="grid-overlay"></div>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="page-head">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow">Cobertura Territorial</p>
+            <h1>Regiões Monitoradas</h1>
+            <p>Biomas brasileiros sob vigilância orbital. Clique em uma região para ver os detalhes.</p>
+          </div>
+          <button class="btn btn-success admin-only" id="btnNova">
+            <span class="icon-text">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Nova Região
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-grid" id="regiaoGrid"></div>
+    </div>
+  </main>
+
+  <!-- Modal detalhes -->
+  <div class="modal-backdrop" id="detailModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="detailTitle">Região</h3>
+        <button class="modal-close" id="detailClose">×</button>
+      </div>
+      <div id="detailBody"></div>
+    </div>
+  </div>
+
+  <!-- Modal nova região -->
+  <div class="modal-backdrop" id="addModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3><span class="icon-text">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Nova Região</span></h3>
+        <button class="modal-close" id="addClose">×</button>
+      </div>
+      <form id="regiaoForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="f_nome">Nome da Região</label>
+            <input type="text" id="f_nome" placeholder="Ex: Mata Atlântica Sul" required>
+          </div>
+          <div class="field">
+            <label for="f_estado">Estado (UF)</label>
+            <input type="text" id="f_estado" placeholder="Ex: SP" maxlength="2" required style="text-transform:uppercase;">
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="addCancel">Cancelar</button>
+          <button type="submit" class="btn btn-success">Salvar Região</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/regioes.js"></script>
+</body>
+</html>
